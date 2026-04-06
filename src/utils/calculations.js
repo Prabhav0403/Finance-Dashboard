@@ -150,18 +150,39 @@ export function getInsights(transactions) {
 
 /**
  * Apply filters + search + sort to transactions
+ *
+ * Extended filter options:
+ *   search       {string}   - text search across description / category / amount
+ *   typeFilter   {string}   - 'all' | 'income' | 'expense'
+ *   categories   {string[]} - array of category names; empty = no filter
+ *   dateFrom     {string}   - ISO date string lower bound (inclusive)
+ *   dateTo       {string}   - ISO date string upper bound (inclusive)
+ *   amountMin    {number}   - minimum absolute amount
+ *   amountMax    {number}   - maximum absolute amount (0 = no limit)
+ *   sortBy       {string}   - 'date' | 'amount'
+ *   sortDir      {string}   - 'asc' | 'desc'
  */
-export function applyFilters(transactions, { search, typeFilter, sortBy, sortDir }) {
+export function applyFilters(transactions, {
+  search     = '',
+  typeFilter = 'all',
+  categories = [],
+  dateFrom   = '',
+  dateTo     = '',
+  amountMin  = 0,
+  amountMax  = 0,
+  sortBy     = 'date',
+  sortDir    = 'desc',
+} = {}) {
   let result = [...transactions];
 
-  // Search
+  // Text search
   if (search) {
     const q = search.toLowerCase();
     result = result.filter(
       t =>
         t.category.toLowerCase().includes(q) ||
         t.description.toLowerCase().includes(q) ||
-        String(Math.abs(t.amount)).includes(q)
+        String(Math.abs(t.amount)).includes(q),
     );
   }
 
@@ -170,13 +191,34 @@ export function applyFilters(transactions, { search, typeFilter, sortBy, sortDir
     result = result.filter(t => t.type === typeFilter);
   }
 
+  // Category multiselect
+  if (categories.length > 0) {
+    result = result.filter(t => categories.includes(t.category));
+  }
+
+  // Date range
+  if (dateFrom) {
+    result = result.filter(t => t.date >= dateFrom);
+  }
+  if (dateTo) {
+    result = result.filter(t => t.date <= dateTo);
+  }
+
+  // Amount range (absolute values)
+  if (amountMin > 0) {
+    result = result.filter(t => Math.abs(t.amount) >= amountMin);
+  }
+  if (amountMax > 0) {
+    result = result.filter(t => Math.abs(t.amount) <= amountMax);
+  }
+
   // Sort
   result.sort((a, b) => {
     let valA, valB;
     if (sortBy === 'date') {
       valA = new Date(a.date);
       valB = new Date(b.date);
-    } else if (sortBy === 'amount') {
+    } else {
       valA = Math.abs(a.amount);
       valB = Math.abs(b.amount);
     }
@@ -184,4 +226,42 @@ export function applyFilters(transactions, { search, typeFilter, sortBy, sortDir
   });
 
   return result;
+}
+
+/**
+ * Return unique sorted category list from a transaction array
+ */
+export function getCategories(transactions) {
+  return [...new Set(transactions.map(t => t.category))].sort();
+}
+
+/**
+ * Group transactions by a key function and return an ordered array
+ * [{ key, label, transactions, total }]
+ *
+ * groupBy: 'month' | 'category' | 'type'
+ */
+export function groupTransactions(transactions, groupBy = 'month') {
+  const map = new Map();
+
+  transactions.forEach(t => {
+    let key, label;
+
+    if (groupBy === 'month') {
+      const d = new Date(t.date);
+      key   = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+      label = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+    } else if (groupBy === 'category') {
+      key = label = t.category;
+    } else {
+      key = label = t.type.charAt(0).toUpperCase() + t.type.slice(1);
+    }
+
+    if (!map.has(key)) map.set(key, { key, label, transactions: [], total: 0 });
+    const group = map.get(key);
+    group.transactions.push(t);
+    group.total += t.type === 'income' ? t.amount : -Math.abs(t.amount);
+  });
+
+  return [...map.values()];
 }

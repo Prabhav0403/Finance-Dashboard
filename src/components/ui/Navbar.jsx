@@ -1,5 +1,5 @@
 import { Sun, Moon, Shield, Eye, Activity } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../context/useApp';
 
 export default function Navbar() {
   const { role, setRole, darkMode, setDarkMode, loading } = useApp();

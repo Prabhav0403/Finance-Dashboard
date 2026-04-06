@@ -1,4 +1,4 @@
-import { useApp } from '../context/AppContext';
+import { useApp } from '../context/useApp';
 import SummaryCards from '../components/dashboard/SummaryCards';
 import BalanceTrendChart from '../components/dashboard/BalanceTrendChart';
 import SpendingPieChart from '../components/dashboard/SpendingPieChart';

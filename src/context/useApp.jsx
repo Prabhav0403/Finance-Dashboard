@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { AppContext } from './AppContext';
-import { AppProvider } from './AppContext';
 
 export function useApp() {
   const ctx = useContext(AppContext);

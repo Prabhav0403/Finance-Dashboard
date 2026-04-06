@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Trash2, ArrowUpDown, ArrowUp, ArrowDown, ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../context/useApp';
 import { formatCurrency, formatDate } from '../../utils/formatters';
 import { categoryColors, categoryIcons } from '../../data/mockTransactions';
 import { groupTransactions } from '../../utils/calculations';

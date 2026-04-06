@@ -1,5 +1,5 @@
 import { TrendingUp, TrendingDown, Wallet, RefreshCw } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../context/useApp';
 import { getSummary } from '../../utils/calculations';
 import { useAnimatedNumber } from '../../hooks/useAnimatedNumber';
 import { StatCardSkeleton } from '../ui/Skeleton';

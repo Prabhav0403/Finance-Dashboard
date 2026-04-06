@@ -3,7 +3,7 @@ import { mockTransactions } from '../data/mockTransactions';
 import { applyFilters, getCategories } from '../utils/calculations';
 import { useMockApi, useMockPost, useMockDelete } from '../hooks/useMockApi';
 
-const AppContext = createContext(null);
+export const AppContext = createContext(null);
 
 const ROLE_KEY  = 'finlens_role';
 const DARK_KEY  = 'finlens_dark';
@@ -152,9 +152,9 @@ export function AppProvider({ children }) {
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
-
+/*
 export function useApp() {
   const ctx = useContext(AppContext);
   if (!ctx) throw new Error('useApp must be used within AppProvider');
   return ctx;
-}
+}*/

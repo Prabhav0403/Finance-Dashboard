@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Search, X, SlidersHorizontal, ChevronDown, Calendar, DollarSign, Tag } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../context/useApp';
 import { categoryColors, categoryIcons } from '../../data/mockTransactions';
 
 /* ─── small helpers ─── */

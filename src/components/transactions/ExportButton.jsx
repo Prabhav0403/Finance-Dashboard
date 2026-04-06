@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { Download, FileJson, FileText, ChevronDown, Check } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../context/useApp';
 import { formatDate } from '../../utils/formatters';
 
 /**

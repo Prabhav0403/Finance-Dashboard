@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Plus, Loader2, AlertCircle } from 'lucide-react';
-import { useApp } from '../../context/AppContext';
+import { useApp } from '../../context/useApp';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
 

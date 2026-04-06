@@ -1,127 +1,135 @@
-# 💰 Finlens — Finance Dashboard
+# 📊 Finance Dashboard
 
-A clean, responsive, feature-complete Finance Dashboard built with React + Vite + Tailwind CSS + Recharts.
-
+🔗 Live Demo: https://finance-dashboard-teal-tau.vercel.app/  
 ---
 
-## 🚀 Quick Start
+## 🚀 Overview
 
-```bash
-# 1. Install dependencies
-npm install
+A modern and responsive **Finance Dashboard** (frontend) built using **React and Vite**, designed to help users track transactions, visualize spending patterns, and gain actionable financial insights.
 
-# 2. Start the dev server
-npm run dev
-
-# 3. Open in browser
-# → http://localhost:5173
-```
-
----
-
-## 🧱 Tech Stack
-
-| Tool | Version | Purpose |
-|------|---------|---------|
-| React | 18 | UI framework |
-| Vite | 5 | Build tool |
-| Tailwind CSS | 3 | Styling |
-| Recharts | 2 | Charts |
-| Lucide React | 0.383 | Icons |
-
----
-
-## 📁 Project Structure
-
-```
-src/
-├── components/
-│   ├── ui/                   # Reusable primitives
-│   │   ├── Card.jsx          # Base card wrapper
-│   │   ├── Button.jsx        # Multi-variant button
-│   │   ├── Badge.jsx         # Income/Expense badge
-│   │   ├── Modal.jsx         # Accessible modal
-│   │   └── Navbar.jsx        # Top navigation
-│   ├── dashboard/
-│   │   ├── SummaryCards.jsx  # KPI stat cards
-│   │   ├── BalanceTrendChart.jsx  # Area chart
-│   │   └── SpendingPieChart.jsx   # Pie chart
-│   ├── transactions/
-│   │   ├── TransactionTable.jsx   # Paginated table
-│   │   ├── TransactionFilters.jsx # Search + filters
-│   │   └── AddTransactionModal.jsx # Admin form
-│   └── insights/
-│       └── InsightsSection.jsx    # Smart insights
-│
-├── pages/
-│   └── Dashboard.jsx         # Main page layout
-│
-├── context/
-│   └── AppContext.jsx         # Global state
-│
-├── data/
-│   └── mockTransactions.js   # 30 mock transactions
-│
-├── utils/
-│   ├── calculations.js        # Business logic
-│   └── formatters.js          # Display helpers
-│
-├── App.jsx
-├── main.jsx
-└── index.css
-```
+The application focuses on delivering a clean UI, smooth user experience, and interactive data visualization.
 
 ---
 
 ## ✨ Features
 
-### Dashboard
-- **Summary Cards** — Total Balance, Income, Expenses with trend indicators
-- **Area Chart** — Monthly income vs expense trend with custom tooltip
-- **Pie Chart** — Spending by category with percentage labels
-
-### Transactions
-- **Search** — Real-time filtering by description, category, amount
-- **Filter Tabs** — All / Income / Expense
-- **Sorting** — By date or amount (ascending/descending)
-- **Pagination** — 8 rows per page
-- **Empty State** — Friendly message when no results
-
-### Insights
-- **Smart Insight** — Auto-generated text based on spending changes
-- **Top Spending Category** — Highest all-time category
-- **Month Comparison** — Current vs previous month spend
-- **Category Progress Bars** — Visual breakdown of all categories
-
-### RBAC (Role-Based UI)
-- **Viewer** — Read-only access
-- **Admin** — Can add and delete transactions
-
-### Add Transaction (Admin only)
-- Description, amount, category, type (income/expense), date
-- Client-side validation with inline error messages
-- Instant state update
-
-### UX Polish
-- ✅ Dark mode toggle (persisted to localStorage)
-- ✅ All state persisted to localStorage
-- ✅ Staggered entrance animations
-- ✅ Hover effects on cards and rows
-- ✅ Responsive (mobile, tablet, desktop)
-- ✅ Custom scrollbar styling
-- ✅ Accessible modal (Escape to close, backdrop click)
-- ✅ Smooth delete animation on rows
+- 📈 Dashboard Overview with summary cards
+- 📊 Time-based visualization (balance trends)
+- 🧾 Category-based expense breakdown
+- 💳 Transaction management (add / delete)
+- 🔍 Advanced filtering and sorting
+- 📤 Export transaction data
+- ⚡ Mock API integration using custom hooks
+- 🎨 Responsive UI with dark mode support
+- ⏳ Loading skeletons and animations
 
 ---
 
-## 🎨 Design System
+## 🛠️ Tech Stack
 
-**Colors**
-- Accent: `#F97316` (Orange)
-- Income: `#10B981` (Green)
-- Expense: `#EF4444` (Red)
-- Background: `#F4F5FA`
+- **Frontend:** React.js (Vite)
+- **State Management:** React Context API
+- **Styling:** CSS
+- **Data Handling:** Mock API + Local State
 
-**Fonts**
-- Display / Headings: **Syne** (Google Fonts)
-- Body: **Outfit** (Google Fonts)
+---
+
+## 📁 Project Structure
+```
+src/
+│
+├── components/ # Reusable UI components
+│ ├── dashboard/ # Dashboard-specific components
+│ │ └── SummaryCards.jsx
+│ │
+│ ├── transactions/ # Transaction-related components
+│ │ ├── TransactionTable.jsx
+│ │ ├── TransactionFilters.jsx
+│ │ ├── AddTransactionModal.jsx
+│ │ └── ExportButton.jsx
+│ │
+│ └── ui/ # Generic UI components
+│ ├── Navbar.jsx
+│ └── Skeleton.jsx
+│
+├── context/ # Global state management
+│ ├── AppContext.jsx # Context provider
+│ └── useApp.jsx # Custom hook
+│
+├── hooks/ # Custom reusable hooks
+│ ├── useMockApi.js
+│ └── useAnimatedNumber.js
+│
+├── pages/ # Page-level components
+│ └── Dashboard.jsx
+│
+├── utils/ # Utility/helper functions
+│ └── calculations.js
+│
+├── data/ # Mock data
+│ └── mockTransactions.js
+│
+├── App.jsx # Root component
+├── main.jsx # Entry point
+└── index.css # Global styles
+```
+---
+
+## ⚙️ Installation & Setup
+
+### 1. Clone the repository
+git clone https://github.com/Prabhav0403/Finance-Dashboard.git
+cd Finance-Dashboard
+
+### 2. Install dependencies
+npm install
+
+### 3. Run development server
+npm run dev
+
+### 4. Build for production
+npm run build
+
+---
+
+## 🌐 Deployment
+
+Deployed using **Vercel** for fast and reliable hosting.
+
+---
+
+## 🧠 Technical Decisions
+
+- Used **Vite** for faster development and optimized builds  
+- Chose **Context API** for simple and maintainable state management  
+- Implemented **custom hooks** for reusable logic (mock API, animations)  
+- Designed modular components for scalability  
+
+---
+
+## ⚠️ Limitations
+
+- Uses mock data (no real backend)
+- No authentication system yet
+- Limited data persistence
+
+---
+
+## 🔮 Future Improvements
+
+- Backend integration (Node.js / Firebase)
+- Authentication and role-based access
+- Advanced analytics and insights
+- Performance optimizations
+
+---
+
+## 👨‍💻 Author
+
+**Prabhav**  
+- LinkedIn: (https://www.linkedin.com/in/prabhav-srivastava-17a081241/)
+---
+
+## ⭐ Support
+
+If you like this project, consider giving it a ⭐ on GitHub!
